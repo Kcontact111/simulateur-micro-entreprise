@@ -561,6 +561,13 @@
     <div id="faqList"></div>
   </div>
 
+  <div class="card faq-section" style="margin-top:14px;">
+    <h2 class="faq-heading" id="aboutHeading" style="font-size:16px;">À propos de cet outil</h2>
+    <p class="faq-a" id="aboutText" style="margin:0;">
+      Simulateur créé et maintenu par <strong>Kconvert</strong>. Aucune donnée n'est transmise à un serveur : le calcul s'effectue entièrement dans votre navigateur, votre chiffre d'affaires n'est ni stocké ni partagé. Barème et seuils vérifiés sur les fiches officielles <a href="https://entreprendre.service-public.gouv.fr" target="_blank" rel="noopener">service-public.gouv.fr</a> (DGFiP / URSSAF). Cet outil est informatif et ne constitue pas un conseil fiscal personnalisé ; consultez un expert-comptable pour votre situation.
+    </p>
+  </div>
+
   <footer>
     <div class="foot-item"><sup>1</sup> <span id="foot1Text"></span></div>
     <div class="foot-item"><sup>2</sup> <span id="foot2Text"></span></div>
@@ -624,6 +631,8 @@ const I18N = {
       "Simulateur informatif, à jour au 22 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité."
     ],
     faqHeading:"Questions fréquentes",
+    aboutHeading:"À propos de cet outil",
+    aboutText:"Simulateur créé et maintenu par <strong>Kconvert</strong>. Aucune donnée n'est transmise à un serveur : le calcul s'effectue entièrement dans votre navigateur, votre chiffre d'affaires n'est ni stocké ni partagé. Barème et seuils vérifiés sur les fiches officielles <a href=\"https://entreprendre.service-public.gouv.fr\" target=\"_blank\" rel=\"noopener\">service-public.gouv.fr</a> (DGFiP / URSSAF). Cet outil est informatif et ne constitue pas un conseil fiscal personnalisé ; consultez un expert-comptable pour votre situation.",
     faq:[
       { q:"Quelle différence entre le plafond micro-entreprise et le seuil de TVA ?", a:"Ce sont deux mécanismes distincts. Le plafond micro-entreprise (203 100 € pour la vente, 83 600 € pour les services en 2026–2028) détermine si vous restez sur le régime micro. Le seuil de franchise en base de TVA (85 000 € / 37 500 € en 2026) détermine si vous devez facturer la TVA. On peut rester en micro-entreprise tout en étant redevable de la TVA." },
       { q:"Que se passe-t-il si je dépasse le plafond micro-entreprise ?", a:"Un dépassement isolé ne fait pas sortir du régime micro. C'est le dépassement du plafond deux années civiles consécutives qui déclenche le passage au régime réel l'année suivante." },
@@ -679,6 +688,8 @@ const I18N = {
       "Informational simulator, up to date as of 22 July 2026. It does not replace advice from a French chartered accountant (expert-comptable), particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity. This is a French-specific regime: it is not equivalent to the UK's VAT registration threshold, US self-employment rules, or any other country's small-business scheme — the thresholds are not interchangeable."
     ],
     faqHeading:"Frequently asked questions",
+    aboutHeading:"About this tool",
+    aboutText:"Simulator built and maintained by <strong>Kconvert</strong>. No data is sent to a server: the calculation runs entirely in your browser, your revenue figures are never stored or shared. Thresholds checked against the official <a href=\"https://entreprendre.service-public.gouv.fr\" target=\"_blank\" rel=\"noopener\">service-public.gouv.fr</a> guidance (DGFiP / URSSAF). This tool is informational and is not personalised tax advice; consult a French chartered accountant for your specific situation.",
     faq:[
       { q:"What's the difference between the micro-entreprise cap and the VAT threshold?", a:"They're two separate mechanisms. The micro-entreprise cap (€203,100 for goods, €83,600 for services in 2026–2028) determines whether you stay on the micro scheme. The VAT exemption threshold (€85,000 / €37,500 in 2026) determines whether you must charge VAT. You can remain a micro-entrepreneur while still being liable for VAT." },
       { q:"What happens if I exceed the micro-entreprise cap?", a:"A one-off overshoot doesn't remove you from the micro scheme. It's exceeding the cap in two consecutive calendar years that triggers the switch to the standard tax regime the following year." },
@@ -734,6 +745,8 @@ const I18N = {
       "Informativer Simulator, Stand 22. Juli 2026. Ersetzt nicht die Beratung durch einen französischen Steuerberater (expert-comptable), insbesondere bei gemischten Tätigkeiten, reglementierten Berufen (Anwälte, Autoren, ausübende Künstler) mit eigenen Schwellen oder im ersten Tätigkeitsjahr. Dies ist ein rein französisches Regime — es entspricht nicht der deutschen Kleinunternehmerregelung, der österreichischen oder Schweizer Kleinunternehmerregelung oder einem anderen nationalen System; die Schwellenwerte sind nicht übertragbar."
     ],
     faqHeading:"Häufig gestellte Fragen",
+    aboutHeading:"Über dieses Tool",
+    aboutText:"Simulator erstellt und gepflegt von <strong>Kconvert</strong>. Es werden keine Daten an einen Server übertragen: Die Berechnung erfolgt vollständig in Ihrem Browser, Ihr Umsatz wird weder gespeichert noch weitergegeben. Schwellenwerte geprüft anhand der offiziellen Angaben auf <a href=\"https://entreprendre.service-public.gouv.fr\" target=\"_blank\" rel=\"noopener\">service-public.gouv.fr</a> (DGFiP / URSSAF). Dieses Tool dient nur der Information und ersetzt keine persönliche Steuerberatung; wenden Sie sich für Ihre Situation an einen französischen Steuerberater (expert-comptable).",
     faq:[
       { q:"Was ist der Unterschied zwischen der Micro-Entreprise-Obergrenze und der MwSt.-Schwelle?", a:"Es sind zwei getrennte Mechanismen. Die Micro-Entreprise-Obergrenze (203.100 € für Warenverkauf, 83.600 € für Dienstleistungen 2026–2028) bestimmt, ob Sie im Micro-Regime bleiben. Die MwSt.-Freigrenze (85.000 € / 37.500 € in 2026) bestimmt, ob Sie Mehrwertsteuer berechnen müssen. Man kann im Micro-Entreprise-Regime bleiben und trotzdem mehrwertsteuerpflichtig sein." },
       { q:"Was passiert, wenn ich die Micro-Entreprise-Obergrenze überschreite?", a:"Eine einmalige Überschreitung führt nicht automatisch aus dem Regime heraus. Erst die Überschreitung in zwei aufeinanderfolgenden Kalenderjahren löst im Folgejahr den Wechsel zum Regelsteuersystem aus." },
@@ -789,6 +802,8 @@ const I18N = {
       "Simulador informativo, actualizado a 22 de julio de 2026. No sustituye el consejo de un asesor fiscal francés (expert-comptable), en particular para actividades mixtas, profesiones reguladas (abogados, autores, artistas intérpretes) con umbrales específicos, o un primer año de actividad. Este es un régimen exclusivamente francés: no equivale al régimen de autónomos español ni a ningún otro régimen nacional, y sus umbrales no son comparables entre países."
     ],
     faqHeading:"Preguntas frecuentes",
+    aboutHeading:"Sobre esta herramienta",
+    aboutText:"Simulador creado y mantenido por <strong>Kconvert</strong>. No se envía ningún dato a un servidor: el cálculo se realiza enteramente en su navegador, su facturación nunca se almacena ni se comparte. Umbrales verificados con la guía oficial de <a href=\"https://entreprendre.service-public.gouv.fr\" target=\"_blank\" rel=\"noopener\">service-public.gouv.fr</a> (DGFiP / URSSAF). Esta herramienta es informativa y no constituye asesoramiento fiscal personalizado; consulte a un asesor fiscal francés (expert-comptable) para su situación.",
     faq:[
       { q:"¿Cuál es la diferencia entre el tope de la micro-entreprise y el umbral de IVA?", a:"Son dos mecanismos distintos. El tope de la micro-entreprise (203.100 € para venta, 83.600 € para servicios en 2026–2028) determina si sigue en el régimen micro. El umbral de exención de IVA (85.000 € / 37.500 € en 2026) determina si debe facturar IVA. Se puede seguir en micro-entreprise y a la vez estar sujeto al IVA." },
       { q:"¿Qué pasa si supero el tope de la micro-entreprise?", a:"Un exceso puntual no le hace salir del régimen micro. Es superar el tope dos años naturales seguidos lo que provoca el paso al régimen real al año siguiente." },
@@ -853,6 +868,8 @@ const els = {
   foot3: document.getElementById('foot3Text'),
   faqHeading: document.getElementById('faqHeading'),
   faqList: document.getElementById('faqList'),
+  aboutHeading: document.getElementById('aboutHeading'),
+  aboutText: document.getElementById('aboutText'),
 };
 
 function fmt(n){
@@ -909,6 +926,8 @@ function applyStaticText(){
   els.faqList.innerHTML = t.faq.map(item =>
     `<div class="faq-item"><h3 class="faq-q">${item.q}</h3><p class="faq-a">${item.a}</p></div>`
   ).join('');
+  els.aboutHeading.textContent = t.aboutHeading;
+  els.aboutText.innerHTML = t.aboutText;
   document.documentElement.lang = currentLang;
 }
 
