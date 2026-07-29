@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plafond auto-entrepreneur &amp; seuil de TVA 2026 : calculez vos seuils micro-entreprise</title>
+<meta name="description" content="Calculez en un clic si vous depassez le plafond micro-entreprise (203 100 € / 83 600 €) ou le seuil de franchise en base de TVA (85 000 € / 37 500 €). Simulateur auto-entrepreneur 2026 a jour, en francais et en anglais.">
+<link rel="canonical" href="https://example.com/simulateur-seuils-micro-entreprise">
+<link rel="alternate" hreflang="fr" href="https://example.com/simulateur-seuils-micro-entreprise">
+<link rel="alternate" hreflang="en" href="https://example.com/en/france-micro-entreprise-vat-thresholds">
+<link rel="alternate" hreflang="x-default" href="https://example.com/simulateur-seuils-micro-entreprise">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:title" content="Plafond auto-entrepreneur &amp; seuil de TVA 2026 : simulateur micro-entreprise">
+<meta property="og:description" content="Calculez en un clic si vous restez sous le plafond micro-entreprise et le seuil de franchise en base de TVA. A jour pour 2026-2028.">
+<meta property="og:image" content="https://i.ibb.co/x8BPb7gY/og-image-seuil-microentreprise.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Plafond auto-entrepreneur &amp; seuil de TVA 2026">
+<meta name="twitter:description" content="Simulateur gratuit : plafond micro-entreprise et seuil de franchise TVA, a jour 2026-2028.">
+<meta name="twitter:image" content="https://i.ibb.co/x8BPb7gY/og-image-seuil-microentreprise.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "fr-FR",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle difference entre le plafond micro-entreprise et le seuil de TVA ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ce sont deux mecanismes distincts. Le plafond micro-entreprise (203 100 € pour la vente, 83 600 € pour les services en 2026-2028) determine si vous restez sur le regime micro. Le seuil de franchise en base de TVA (85 000 € / 37 500 € en 2026) determine si vous devez facturer la TVA. On peut rester en micro-entreprise tout en etant redevable de la TVA." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que se passe-t-il si je depasse le plafond micro-entreprise ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un depassement isole ne fait pas sortir du regime micro. C'est le depassement du plafond deux annees civiles consecutives qui declenche le passage au regime reel l'annee suivante." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quand dois-je commencer a facturer la TVA en tant qu'auto-entrepreneur ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Si votre chiffre d'affaires depasse le seuil de base (85 000 € pour la vente, 37 500 € pour les services) mais reste sous le seuil majore, la franchise est maintenue jusqu'a la fin de l'annee et vous facturez la TVA a partir du 1er janvier suivant si vous restez au-dessus du seuil de base. Si vous depassez le seuil majore (93 500 € / 41 250 €), la TVA s'applique immediatement, des le jour du depassement." }
+    },
+    {
+      "@type": "Question",
+      "name": "Les seuils sont-ils proratises la premiere annee d'activite ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Si vous creez votre activite en cours d'annee, les seuils (plafond micro et seuils de TVA) sont calcules au prorata du nombre de jours d'activite restants sur l'annee civile." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont les plafonds micro-entreprise pour 2026-2028 ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "203 100 € pour la vente de marchandises et l'hebergement, 83 600 € pour les prestations de services (BIC/BNC), et 15 000 € pour la location meublee non classee." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --paper: #EEF1EF;
+    --paper-line: #dfe4e0;
+    --ink: #17233D;
+    --ink-soft: #4B5468;
+    --ink-faint: #8890A0;
+    --rail-bg: #E1E5E0;
+    --safe: #3F6E52;
+    --safe-bg: #E1ECE4;
+    --watch: #B67A2E;
+    --watch-bg: #F3E7D3;
+    --danger: #A5423A;
+    --danger-bg: #F2DDDA;
+    --card: #FFFFFF;
+    --radius: 14px;
+    --pill: 999px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--ink);}
+  :focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+
+  /* ---------- Barre du hub, partagée par tous les outils ---------- */
+  .hubbar{background:#17233D;color:#E9EDEA;font-size:14px;}
+  .hubbar .wrap{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:24px;min-height:56px;flex-wrap:wrap;}
+  .hublogo{font-family:'IBM Plex Serif',serif;font-weight:600;font-size:17px;color:#fff;text-decoration:none;}
+  .hublogo span{color:#7FBFA6;}
+  .hubnav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;align-items:center;}
+  .hubnav a{color:#B6C0BA;text-decoration:none;padding:6px 12px;border-radius:var(--pill);transition:background .18s ease,color .18s ease;}
+  .hubnav a:hover{color:#fff;background:rgba(255,255,255,.08);}
+  .hubnav a[aria-current="page"]{color:#fff;background:rgba(255,255,255,.11);}
+  .langtabs{display:flex;background:rgba(255,255,255,.08);border-radius:var(--pill);padding:3px;margin-left:8px;}
+  .langtabs button{background:transparent;border:0;color:#A9B4AE;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.07em;padding:5px 12px;cursor:pointer;border-radius:var(--pill);transition:background .18s ease,color .18s ease;}
+  .langtabs button:hover{color:#fff;}
+  .langtabs button[aria-pressed="true"]{background:#7FBFA6;color:#062018;font-weight:600;}
+
+  .locale-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  .locale-tag .swatch{
+    display:inline-flex;
+    width:14px; height:14px;
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .locale-tag .swatch span{flex:1; height:100%;}
+  .locale-tag .swatch span:nth-child(1){background:#1F3A5F;}
+  .locale-tag .swatch span:nth-child(2){background:#E8E6DE;}
+  .locale-tag .swatch span:nth-child(3){background:#A5423A;}
+
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    padding:40px 24px 80px;
+  }
+
+  h1{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:600;
+    font-size:clamp(26px, 4vw, 36px);
+    line-height:1.2;
+    margin:16px 0 16px;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0 0 40px;
+  }
+  .lede strong{color:var(--ink); font-weight:600;}
+
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    border:1px solid var(--paper-line);
+    padding:28px;
+    margin-bottom:28px;
+  }
+  .field-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:10px;
+    display:block;
+  }
+
+  .segmented{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:8px;
+    margin-bottom:24px;
+  }
+  .segmented button{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px;
+    font-weight:500;
+    padding:12px 10px;
+    border-radius:9px;
+    border:1px solid var(--paper-line);
+    background:var(--paper);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s ease;
+    text-align:center;
+    line-height:1.3;
+  }
+  .segmented button:hover{border-color:var(--ink-faint);}
+  .segmented button.active{
+    background:var(--ink);
+    color:#fff;
+    border-color:var(--ink);
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:560px){.row{grid-template-columns:1fr;}}
+
+  .input-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .input-wrap input[type=number]{
+    width:100%;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:20px;
+    font-weight:500;
+    padding:12px 40px 12px 14px;
+    border:1.5px solid var(--paper-line);
+    border-radius:9px;
+    background:#fff;
+    color:var(--ink);
+  }
+  .input-wrap input[type=number]:focus{outline:none;border-color:var(--ink);}
+  .input-wrap .suffix{
+    position:absolute;
+    right:14px;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ink-faint);
+    font-size:15px;
+  }
+
+  .toggle-line{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-top:14px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .toggle-line input{width:16px;height:16px;accent-color:var(--ink);}
+  .date-wrap{display:none;}
+  .date-wrap.open{display:block;}
+  .date-wrap input[type=date]{
+    margin-top:8px;
+    width:100%;
+    padding:10px 12px;
+    border:1.5px solid var(--paper-line);
+    border-radius:9px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px;
+    background:#fff;
+    color:var(--ink);
+  }
+
+  .rail-block{margin-bottom:32px;}
+  .rail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+  .rail-title-group{display:flex;flex-direction:column;gap:4px;}
+  .rail-title{font-size:15px;font-weight:600;margin:0;display:flex;align-items:baseline;gap:4px;}
+  .rail-title sup{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-faint);}
+  .rail-value{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);}
+  .rail-value .sep{margin:0 8px;color:var(--paper-line);}
+  .status-badge{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.04em;
+    padding:5px 11px;
+    border-radius:var(--pill);
+    white-space:nowrap;
+  }
+  .status-badge.safe{background:var(--safe-bg);color:var(--safe);}
+  .status-badge.watch{background:var(--watch-bg);color:var(--watch);}
+  .status-badge.danger{background:var(--danger-bg);color:var(--danger);}
+
+  .rail-track{position:relative;height:10px;border-radius:var(--pill);background:var(--rail-bg);overflow:visible;margin-bottom:8px;}
+  .rail-zone{position:absolute;top:0;height:100%;}
+  .rail-zone.safe{background:var(--safe);border-radius:var(--pill) 0 0 var(--pill);}
+  .rail-zone.watch{background:var(--watch);}
+  .rail-zone.danger{background:var(--danger);border-radius:0 var(--pill) var(--pill) 0;}
+  .rail-marker{position:absolute;top:-4px;width:3px;height:18px;background:var(--ink);border-radius:2px;transform:translateX(-50%);transition:left .25s ease;}
+  .rail-pin{
+    position:absolute;top:-38px;transform:translateX(-50%);
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;
+    padding:4px 9px;border-radius:7px;white-space:nowrap;transition:left .25s ease;
+  }
+  .rail-pin::after{content:"";position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:7px;height:7px;background:inherit;transform:translateX(-50%) rotate(45deg);}
+  .rail-pin.safe{background:var(--safe);color:#fff;}
+  .rail-pin.watch{background:var(--watch);color:#fff;}
+  .rail-pin.danger{background:var(--danger);color:#fff;}
+  .rail-ticks{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);margin-bottom:10px;}
+  .rail-caption{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.55;}
+  .rail-caption strong{color:var(--ink);}
+
+  .verdict{
+    display:flex;gap:16px;align-items:flex-start;
+    border-radius:var(--radius);
+    padding:22px 24px;
+    margin-bottom:28px;
+  }
+  .verdict.safe{background:var(--safe-bg);}
+  .verdict.watch{background:var(--watch-bg);}
+  .verdict.danger{background:var(--danger-bg);}
+  .verdict-icon{
+    font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:18px;
+    width:30px;height:30px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex:none;
+    background:rgba(255,255,255,.6);
+  }
+  .verdict.safe .verdict-icon{color:var(--safe);}
+  .verdict.watch .verdict-icon{color:var(--watch);}
+  .verdict.danger .verdict-icon{color:var(--danger);}
+  .verdict-title{font-family:'IBM Plex Serif',serif;font-weight:600;font-size:16.5px;margin-bottom:4px;}
+  .verdict.safe .verdict-title{color:var(--safe);}
+  .verdict.watch .verdict-title{color:var(--watch);}
+  .verdict.danger .verdict-title{color:var(--danger);}
+  .verdict p{margin:0; font-size:15px; color:var(--ink);}
+
+  .faq-section{margin-top:28px;}
+  .faq-heading{font-family:'IBM Plex Serif', serif;font-size:20px;font-weight:600;margin:0 0 16px;}
+  .faq-item{border-top:1px solid var(--paper-line);padding:18px 0;}
+  .faq-item:last-child{padding-bottom:0;}
+  .faq-q{font-family:'IBM Plex Sans', sans-serif;font-size:15px;font-weight:600;margin:0 0 8px;color:var(--ink);}
+  .faq-a{font-size:14px;color:var(--ink-soft);margin:0;line-height:1.6;}
+
+  .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;}
+  .tool{display:block;background:var(--card);border:1px solid var(--paper-line);border-radius:var(--radius);padding:16px 18px;text-decoration:none;color:var(--ink);transition:transform .18s ease,box-shadow .18s ease;}
+  .tool:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(23,35,61,.08);}
+  .tool .tk{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);}
+  .tool .tt{font-family:'IBM Plex Serif',serif;font-weight:600;font-size:15.5px;margin:6px 0 4px;}
+  .tool .td{font-size:13px;color:var(--ink-soft);line-height:1.45;}
+
+  footer{
+    margin-top:40px;
+    padding-top:24px;
+    border-top:1px solid var(--paper-line);
+    font-size:12px;
+    color:var(--ink-faint);
+    line-height:1.7;
+  }
+  footer .foot-item{margin-bottom:6px;}
+  footer .foot-item sup{font-family:'IBM Plex Mono', monospace;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="hubbar"><div class="wrap">
+  <a class="hublogo" href="/">Les Bons <span>Chiffres</span></a>
+  <div class="hubnav">
+    <a href="/simulateur-seuils-micro-entreprise" aria-current="page" data-i="navMicro">Seuils micro-entreprise</a>
+    <a href="/calculateur-salaire-brut-net" data-i="navSalaire">Salaire brut / net</a>
+    <div class="langtabs" role="group" aria-label="Language">
+      <button type="button" id="btnFr" aria-pressed="true">FR</button>
+      <button type="button" id="btnEn" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</div></nav>
+
+<div class="page">
+
+  <div class="locale-tag">
+    <span class="swatch"><span></span><span></span><span></span></span>
+    <span id="localeTagText" data-i="eyebrow">France · Seuils 2026–2028</span>
+  </div>
+
+  <h1 id="mainTitle" data-i="h1">Plafond auto-entrepreneur et seuil de TVA : vos seuils micro-entreprise 2026</h1>
+  <p class="lede" id="ledeText" data-ihtml="lede">Le plafond qui vous maintient en <strong>micro-entreprise</strong> et le seuil de <strong>franchise de TVA</strong> sont deux mécanismes distincts, avec des montants différents. Entrez votre chiffre d'affaires pour savoir immédiatement où vous en êtes sur les deux.</p>
+
+  <div class="card">
+    <span class="field-label" id="activityFieldLabel" data-i="activityFieldLabel">Nature de l'activité</span>
+    <div class="segmented" id="activitySelector">
+      <button data-key="vente" class="active">Vente de marchandises,<br>hébergement</button>
+      <button data-key="services">Prestations de services<br>(BIC / BNC)</button>
+      <button data-key="meuble">Location meublée<br>non classée</button>
+    </div>
+
+    <div class="row">
+      <div>
+        <span class="field-label" id="caFieldLabel" data-i="caFieldLabel">Chiffre d'affaires encaissé (HT)</span>
+        <div class="input-wrap">
+          <input type="number" id="caInput" value="45000" min="0" step="500">
+          <span class="suffix">€</span>
+        </div>
+        <div class="toggle-line">
+          <input type="checkbox" id="prorataToggle">
+          <label for="prorataToggle" id="prorataLabel" data-i="prorataLabel">Activité créée en cours d'année (seuils proratisés)</label>
+        </div>
+        <div class="date-wrap" id="dateWrap">
+          <span class="field-label" id="dateFieldLabel" data-i="dateFieldLabel" style="margin-top:14px;">Date de création de l'activité</span>
+          <input type="date" id="creationDate" value="2026-04-01">
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <p style="font-size:13px; color:var(--ink-soft); margin:0;" id="helperText" data-ihtml="helperText">Le CA s'entend <strong>encaissé</strong>, hors taxes, sur l'année civile — c'est ce montant qui compte pour les deux seuils, pas le CA facturé.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rail-block">
+      <div class="rail-head">
+        <div class="rail-title-group">
+        <h2 class="rail-title"><span id="railMicroTitleText" data-i="railMicroTitle">Plafond micro-entreprise 2026</span><sup>1</sup></h2>
+          <span class="rail-value" id="microValue">plafond&nbsp;: <strong>203 100 €</strong></span>
+        </div>
+        <span class="status-badge safe" id="microBadge">OK</span>
+      </div>
+      <div class="rail-track" id="microTrack">
+        <div class="rail-zone safe" id="microZoneSafe"></div>
+        <div class="rail-zone watch" id="microZoneWatch"></div>
+        <div class="rail-zone danger" id="microZoneDanger"></div>
+        <div class="rail-marker" id="microMarker"></div>
+        <div class="rail-pin safe" id="microPin"><span id="microPinText">45 000 €</span></div>
+      </div>
+      <div class="rail-ticks"><span>0 €</span><span id="microMax">233 565 €</span></div>
+      <p class="rail-caption" id="microCaption">Il vous reste <strong>158 100 €</strong> de marge avant le plafond du régime micro pour cette activité.</p>
+    </div>
+
+    <div class="rail-block" style="margin-bottom:0;">
+      <div class="rail-head">
+        <div class="rail-title-group">
+        <h2 class="rail-title"><span id="railTvaTitleText" data-i="railTvaTitle">Franchise de TVA auto-entrepreneur</span><sup>2</sup></h2>
+          <span class="rail-value" id="tvaValue">base&nbsp;: <strong>85 000 €</strong><span class="sep">·</span>majoré&nbsp;: <strong>93 500 €</strong></span>
+        </div>
+        <span class="status-badge safe" id="tvaBadge">Franchise</span>
+      </div>
+      <div class="rail-track" id="tvaTrack">
+        <div class="rail-zone safe" id="tvaZoneSafe"></div>
+        <div class="rail-zone watch" id="tvaZoneWatch"></div>
+        <div class="rail-zone danger" id="tvaZoneDanger"></div>
+        <div class="rail-marker" id="tvaMarker"></div>
+        <div class="rail-pin safe" id="tvaPin"><span id="tvaPinText">45 000 €</span></div>
+      </div>
+      <div class="rail-ticks"><span>0 €</span><span id="tvaMax">107 525 €</span></div>
+      <p class="rail-caption" id="tvaCaption">Vous êtes sous le seuil de franchise (<strong>85 000 €</strong>) : pas de TVA à facturer.</p>
+    </div>
+  </div>
+
+  <div class="verdict safe" id="verdict">
+    <div class="verdict-icon" id="verdictIcon">✓</div>
+    <div class="verdict-text">
+      <div class="verdict-title" id="verdictTitle">Tout est en ordre</div>
+      <p id="verdictBody">Votre CA reste sous les deux seuils : vous conservez le régime micro et la franchise de TVA pour une activité de vente de marchandises / hébergement.</p>
+    </div>
+  </div>
+
+  <div class="card faq-section">
+    <h2 class="faq-heading" id="faqHeading" data-i="faqHeading">Questions fréquentes</h2>
+    <div id="faqList"></div>
+  </div>
+
+  <div class="card faq-section" style="margin-top:14px;">
+    <h2 class="faq-heading" id="aboutHeading" data-i="aboutHeading" style="font-size:16px;">À propos de cet outil</h2>
+    <p class="faq-a" id="aboutText" data-ihtml="aboutText" style="margin:0;">Simulateur créé et maintenu par <strong>Kconvert</strong>. Aucune donnée n'est transmise à un serveur : le calcul s'effectue entièrement dans votre navigateur, votre chiffre d'affaires n'est ni stocké ni partagé. Barème et seuils vérifiés sur les fiches officielles <a href="https://entreprendre.service-public.gouv.fr/" target="_blank" rel="noopener">service-public.gouv.fr</a> (DGFiP / URSSAF). Cet outil est informatif et ne constitue pas un conseil fiscal personnalisé ; consultez un expert-comptable pour votre situation.</p>
+  </div>
+
+  <div class="card faq-section" style="margin-top:14px;">
+    <h2 class="faq-heading" style="font-size:16px;" data-i="toolsTitle">Les autres outils</h2>
+    <div class="tools">
+      <a class="tool" href="/calculateur-salaire-brut-net">
+        <div class="tk" data-i="t2k">Salariés</div>
+        <div class="tt" data-i="t2t">Salaire brut en net</div>
+        <div class="td" data-i="t2d">Convertissez brut en net et net en brut, avec le détail de chaque cotisation.</div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-item"><sup>1</sup> <span id="foot1Text" data-ihtml="foot1">Plafonds 2026–2028 : 203 100 € (vente / hébergement), 83 600 € (services BIC/BNC), 15 000 € (meublés non classés). Dépassement deux années consécutives → sortie du régime micro l'année suivante.</span></div>
+    <div class="foot-item"><sup>2</sup> <span id="foot2Text" data-ihtml="foot2">Franchise TVA 2026 : seuil de base 85 000 € / seuil majoré 93 500 € (vente, hébergement) ; seuil de base 37 500 € / seuil majoré 41 250 € (services). Entre les deux seuils, la franchise est maintenue jusqu'à la fin de l'année en cours ; au-delà du seuil majoré, la TVA s'applique dès le jour du dépassement. Les meublés non classés sont approchés ici avec le seuil des services — vérifiez ce point si vous cumulez plusieurs activités.</span></div>
+    <div class="foot-item"><span id="foot3Text" data-i="foot3">Simulateur informatif, à jour au 27 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité.</span></div>
+  </footer>
+
+</div>
+
+<script src="/baremes.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* Seuils : source unique dans baremes.js. Si ce fichier n'est pas chargé
+   (ouverture locale du HTML sans serveur), on retombe sur ces valeurs de
+   secours, qui doivent rester identiques à celles de baremes.js. */
+var BX = window.BAREMES;
+var ACTIVITIES = BX ? {
+  vente:    { plafondMicro: BX.MICRO.plafondVente,   tvaBase: BX.MICRO.tvaBaseVente,   tvaMajore: BX.MICRO.tvaMajoreVente },
+  services: { plafondMicro: BX.MICRO.plafondService, tvaBase: BX.MICRO.tvaBaseService, tvaMajore: BX.MICRO.tvaMajoreService },
+  meuble:   { plafondMicro: BX.MICRO.plafondMeuble,  tvaBase: BX.MICRO.tvaBaseService, tvaMajore: BX.MICRO.tvaMajoreService }
+} : {
+  vente:    { plafondMicro:203100, tvaBase:85000, tvaMajore:93500 },
+  services: { plafondMicro:83600,  tvaBase:37500, tvaMajore:41250 },
+  meuble:   { plafondMicro:15000,  tvaBase:37500, tvaMajore:41250 }
+};
+
+/* ================= Traductions (FR/EN) ================= */
+var D={fr:{},en:{}},F=D.fr,N=D.en;
+
+F.title="Plafond auto-entrepreneur & seuil de TVA 2026 : calculez vos seuils micro-entreprise";
+F.metaDesc="Calculez en un clic si vous depassez le plafond micro-entreprise (203 100 EUR / 83 600 EUR) ou le seuil de franchise en base de TVA (85 000 EUR / 37 500 EUR). Simulateur auto-entrepreneur 2026 a jour, en francais et en anglais.";
+F.navMicro="Seuils micro-entreprise";F.navSalaire="Salaire brut / net";
+F.eyebrow="France · Seuils 2026–2028";
+F.h1="Plafond auto-entrepreneur et seuil de TVA : vos seuils micro-entreprise 2026";
+F.lede="Le plafond qui vous maintient en <strong>micro-entreprise</strong> et le seuil de <strong>franchise de TVA</strong> sont deux mécanismes distincts, avec des montants différents. Entrez votre chiffre d'affaires pour savoir immédiatement où vous en êtes sur les deux.";
+F.activityFieldLabel="Nature de l'activité";
+F.activities={vente:"Vente de marchandises,<br>hébergement",services:"Prestations de services<br>(BIC / BNC)",meuble:"Location meublée<br>non classée"};
+F.activityNames={vente:"vente de marchandises / hébergement",services:"prestations de services (BIC/BNC)",meuble:"location meublée non classée"};
+F.caFieldLabel="Chiffre d'affaires encaissé (HT)";
+F.prorataLabel="Activité créée en cours d'année (seuils proratisés)";
+F.dateFieldLabel="Date de création de l'activité";
+F.helperText="Le CA s'entend <strong>encaissé</strong>, hors taxes, sur l'année civile — c'est ce montant qui compte pour les deux seuils, pas le CA facturé.";
+F.railMicroTitle="Plafond micro-entreprise 2026";
+F.railTvaTitle="Franchise de TVA auto-entrepreneur";
+F.plafondWord="plafond";F.baseWord="base";F.majoreWord="majoré";
+F.badges={ok:"OK", watch:"À surveiller", over:"Dépassé", franchise:"Franchise", tolerance:"Tolérance", tvaDue:"TVA due"};
+F.microCaptionOver=function(over){return "Vous dépassez le plafond du régime micro de <strong>"+over+"</strong>. Un dépassement isolé ne fait pas sortir du régime — c'est le dépassement <strong>deux années civiles de suite</strong> qui déclenche la bascule vers le régime réel l'année suivante.";};
+F.microCaptionWatch=function(marge){return "Il vous reste <strong>"+marge+"</strong> avant le plafond du régime micro — vous entrez dans la zone à surveiller de près d'ici la fin de l'année.";};
+F.microCaptionSafe=function(marge){return "Il vous reste <strong>"+marge+"</strong> de marge avant le plafond du régime micro pour cette activité.";};
+F.tvaCaptionSafe=function(base){return "Vous êtes sous le seuil de franchise (<strong>"+base+"</strong>) : pas de TVA à facturer.";};
+F.tvaCaptionWatch=function(base,majore){return "Vous avez dépassé le seuil de base (<strong>"+base+"</strong>) mais restez sous le seuil majoré (<strong>"+majore+"</strong>) : la franchise est maintenue jusqu'à la fin de l'année. Si vous restez au-dessus du seuil de base l'an prochain, vous facturerez la TVA dès le 1er janvier suivant.";};
+F.tvaCaptionOver=function(majore){return "Vous dépassez le seuil majoré (<strong>"+majore+"</strong>) : la TVA s'applique dès le jour du dépassement, sans délai.";};
+F.verdict={
+  dangerTitle:"Action à prévoir rapidement",
+  dangerBodyMicro:function(name){return "Votre CA dépasse le plafond du régime micro pour une activité de "+name+". Surveillez votre CA cumulé sur les deux dernières années civiles : un second dépassement consécutif vous fait basculer au régime réel.";},
+  dangerBodyTva:"Votre CA dépasse le seuil majoré de TVA. Vous devez facturer la TVA sur vos prestations dès à présent, avec un numéro de TVA intracommunautaire et un logiciel de facturation conforme.",
+  watchTitle:"Sous surveillance",
+  watchBody:"Vous restez en micro-entreprise, mais vous approchez d'un des deux seuils. Suivez votre CA mensuellement d'ici la fin de l'année pour anticiper la suite.",
+  safeTitle:"Tout est en ordre",
+  safeBody:function(name){return "Votre CA reste sous les deux seuils : vous conservez le régime micro et la franchise de TVA pour une activité de "+name+".";}
+};
+F.footnotes=["Plafonds 2026–2028 : 203 100 € (vente / hébergement), 83 600 € (services BIC/BNC), 15 000 € (meublés non classés). Dépassement deux années consécutives → sortie du régime micro l'année suivante.",
+"Franchise TVA 2026 : seuil de base 85 000 € / seuil majoré 93 500 € (vente, hébergement) ; seuil de base 37 500 € / seuil majoré 41 250 € (services). Entre les deux seuils, la franchise est maintenue jusqu'à la fin de l'année en cours ; au-delà du seuil majoré, la TVA s'applique dès le jour du dépassement. Les meublés non classés sont approchés ici avec le seuil des services — vérifiez ce point si vous cumulez plusieurs activités.",
+"Simulateur informatif, à jour au 27 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité."];
+F.foot1=F.footnotes[0];F.foot2=F.footnotes[1];
+F.faqHeading="Questions fréquentes";
+F.aboutHeading="À propos de cet outil";
+F.aboutText="Simulateur créé et maintenu par <strong>Kconvert</strong>. Aucune donnée n'est transmise à un serveur : le calcul s'effectue entièrement dans votre navigateur, votre chiffre d'affaires n'est ni stocké ni partagé. Barème et seuils vérifiés sur les fiches officielles <a href=\"https://entreprendre.service-public.gouv.fr\" target=\"_blank\" rel=\"noopener\">service-public.gouv.fr</a> (DGFiP / URSSAF). Cet outil est informatif et ne constitue pas un conseil fiscal personnalisé ; consultez un expert-comptable pour votre situation.";
+F.faq=[
+  { q:"Quelle différence entre le plafond micro-entreprise et le seuil de TVA ?", a:"Ce sont deux mécanismes distincts. Le plafond micro-entreprise (203 100 € pour la vente, 83 600 € pour les services en 2026–2028) détermine si vous restez sur le régime micro. Le seuil de franchise en base de TVA (85 000 € / 37 500 € en 2026) détermine si vous devez facturer la TVA. On peut rester en micro-entreprise tout en étant redevable de la TVA." },
+  { q:"Que se passe-t-il si je dépasse le plafond micro-entreprise ?", a:"Un dépassement isolé ne fait pas sortir du régime micro. C'est le dépassement du plafond deux années civiles consécutives qui déclenche le passage au régime réel l'année suivante." },
+  { q:"Quand dois-je commencer à facturer la TVA en tant qu'auto-entrepreneur ?", a:"Si votre CA dépasse le seuil de base mais reste sous le seuil majoré, la franchise est maintenue jusqu'à la fin de l'année et vous facturez la TVA à partir du 1er janvier suivant si vous restez au-dessus du seuil de base. Si vous dépassez le seuil majoré, la TVA s'applique immédiatement, dès le jour du dépassement." },
+  { q:"Les seuils sont-ils proratisés la première année d'activité ?", a:"Oui. Si vous créez votre activité en cours d'année, les seuils (plafond micro et seuils de TVA) sont calculés au prorata du nombre de jours d'activité restants sur l'année civile." },
+  { q:"Quels sont les plafonds micro-entreprise pour 2026–2028 ?", a:"203 100 € pour la vente de marchandises et l'hébergement, 83 600 € pour les prestations de services (BIC/BNC), et 15 000 € pour la location meublée non classée." }
+];
+F.toolsTitle="Les autres outils";
+F.t2k="Salariés";F.t2t="Salaire brut en net";F.t2d="Convertissez brut en net et net en brut, avec le détail de chaque cotisation.";
+F.foot3="Simulateur informatif, à jour au 27 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité.";
+
+N.title="France Micro-Entrepreneur: Turnover Cap & VAT Threshold Calculator 2026";
+N.metaDesc="Check instantly whether you exceed the micro-entreprise cap (EUR 203,100 / EUR 83,600) or the VAT exemption threshold (EUR 85,000 / EUR 37,500). Auto-entrepreneur simulator, current for 2026, in French and English.";
+N.navMicro="Micro-entreprise thresholds";N.navSalaire="Gross to net salary";
+N.eyebrow="France · 2026–2028 thresholds";
+N.h1="Micro-Entrepreneur (Auto-Entrepreneur) France: Turnover & VAT Threshold Calculator 2026";
+N.lede="The cap that keeps you on the French <strong>micro-entreprise</strong> scheme and the <strong>VAT exemption threshold</strong> (franchise en base de TVA) are two separate mechanisms, with different amounts. Enter your revenue to see instantly where you stand on both.";
+N.activityFieldLabel="Type of activity";
+N.activities={vente:"Sale of goods,<br>accommodation",services:"Services<br>(BIC / BNC)",meuble:"Unclassified furnished<br>rental"};
+N.activityNames={vente:"sale of goods / accommodation",services:"services (BIC/BNC)",meuble:"unclassified furnished rental"};
+N.caFieldLabel="Revenue received (excl. tax)";
+N.prorataLabel="Business created mid-year (pro-rated thresholds)";
+N.dateFieldLabel="Business start date";
+N.helperText="Revenue means amounts <strong>actually received</strong>, excluding tax, over the calendar year — this is what counts for both thresholds, not invoiced revenue.";
+N.railMicroTitle="French micro-entreprise cap 2026";
+N.railTvaTitle="VAT exemption threshold (auto-entrepreneur)";
+N.plafondWord="cap";N.baseWord="base";N.majoreWord="upper";
+N.badges={ok:"OK", watch:"Watch closely", over:"Exceeded", franchise:"VAT-exempt", tolerance:"Tolerance", tvaDue:"VAT due"};
+N.microCaptionOver=function(over){return "You are exceeding the micro-entreprise cap by <strong>"+over+"</strong>. A one-off overshoot does not remove you from the scheme — it's exceeding the cap in <strong>two consecutive calendar years</strong> that triggers a switch to the standard tax regime the following year.";};
+N.microCaptionWatch=function(marge){return "You have <strong>"+marge+"</strong> left before the micro-entreprise cap — you're entering the zone to watch closely before year-end.";};
+N.microCaptionSafe=function(marge){return "You have <strong>"+marge+"</strong> of headroom left before the micro-entreprise cap for this activity.";};
+N.tvaCaptionSafe=function(base){return "You are below the VAT exemption base threshold (<strong>"+base+"</strong>): no VAT to charge.";};
+N.tvaCaptionWatch=function(base,majore){return "You've exceeded the base threshold (<strong>"+base+"</strong>) but stay below the upper threshold (<strong>"+majore+"</strong>): the exemption still applies until year-end. If you stay above the base threshold next year, you'll charge VAT from 1 January.";};
+N.tvaCaptionOver=function(majore){return "You are exceeding the upper VAT threshold (<strong>"+majore+"</strong>): VAT applies from the day you crossed it, with no grace period.";};
+N.verdict={
+  dangerTitle:"Action needed soon",
+  dangerBodyMicro:function(name){return "Your revenue exceeds the micro-entreprise cap for a "+name+" activity. Track your combined revenue over the last two calendar years: a second consecutive overshoot switches you to the standard tax regime.";},
+  dangerBodyTva:"Your revenue exceeds the upper VAT threshold. You must charge VAT on your services from now on, with an intra-EU VAT number and compliant invoicing software.",
+  watchTitle:"Under watch",
+  watchBody:"You remain on the micro-entreprise scheme, but you're approaching one of the two thresholds. Track your revenue monthly until year-end to plan ahead.",
+  safeTitle:"Everything is in order",
+  safeBody:function(name){return "Your revenue stays below both thresholds: you keep the micro-entreprise scheme and the VAT exemption for a "+name+" activity.";}
+};
+N.footnotes=["2026–2028 caps: €203,100 (goods / accommodation), €83,600 (services, BIC/BNC), €15,000 (unclassified furnished rentals). Exceeding the cap two years in a row moves you to the standard tax regime the following year.",
+"2026 VAT exemption (franchise en base de TVA): base threshold €85,000 / upper threshold €93,500 (goods, accommodation); base threshold €37,500 / upper threshold €41,250 (services). Between the two thresholds, the exemption still applies until year-end; above the upper threshold, VAT applies from the day it's crossed. Unclassified furnished rentals are approximated here with the services threshold — check this if you combine several activities.",
+"Informational simulator, up to date as of 27 July 2026. It does not replace advice from a French chartered accountant (expert-comptable), particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity. This is a French-specific regime: it is not equivalent to the UK's VAT registration threshold, US self-employment rules, or any other country's small-business scheme — the thresholds are not interchangeable."];
+N.foot1=N.footnotes[0];N.foot2=N.footnotes[1];
+N.faqHeading="Frequently asked questions";
+N.aboutHeading="About this tool";
+N.aboutText="Simulator built and maintained by <strong>Kconvert</strong>. No data is sent to a server: the calculation runs entirely in your browser, your revenue figures are never stored or shared. Thresholds checked against the official <a href=\"https://entreprendre.service-public.gouv.fr\" target=\"_blank\" rel=\"noopener\">service-public.gouv.fr</a> guidance (DGFiP / URSSAF). This tool is informational and is not personalised tax advice; consult a French chartered accountant for your specific situation.";
+N.faq=[
+  { q:"What's the difference between the micro-entreprise cap and the VAT threshold?", a:"They're two separate mechanisms. The micro-entreprise cap (€203,100 for goods, €83,600 for services in 2026–2028) determines whether you stay on the micro scheme. The VAT exemption threshold (€85,000 / €37,500 in 2026) determines whether you must charge VAT. You can remain a micro-entrepreneur while still being liable for VAT." },
+  { q:"What happens if I exceed the micro-entreprise cap?", a:"A one-off overshoot doesn't remove you from the micro scheme. It's exceeding the cap in two consecutive calendar years that triggers the switch to the standard tax regime the following year." },
+  { q:"When do I need to start charging VAT as an auto-entrepreneur?", a:"If your revenue exceeds the base threshold but stays below the upper threshold, the exemption still applies until year-end and you'll charge VAT from 1 January if you remain above the base threshold. If you exceed the upper threshold, VAT applies immediately, from the day you crossed it." },
+  { q:"Are the thresholds pro-rated in your first year of activity?", a:"Yes. If you start your business partway through the year, both the micro-entreprise cap and the VAT thresholds are calculated pro rata to the number of days remaining in the calendar year." },
+  { q:"What are the micro-entreprise caps for 2026–2028?", a:"€203,100 for the sale of goods and accommodation, €83,600 for services (BIC/BNC), and €15,000 for unclassified furnished rentals." }
+];
+N.toolsTitle="Other tools";
+N.t2k="Employees";N.t2t="Gross to net salary";N.t2d="Convert gross to net and back, with every contribution itemised.";
+N.foot3="Informational simulator, up to date as of 27 July 2026. It does not replace advice from a French chartered accountant, particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity.";
+
+var lang='fr';
+
+/* ================= État et éléments ================= */
+var currentActivity = 'vente';
+
+var els = {
+  localeTagText: document.getElementById('localeTagText'),
+  mainTitle: document.getElementById('mainTitle'),
+  ledeText: document.getElementById('ledeText'),
+  activityFieldLabel: document.getElementById('activityFieldLabel'),
+  activityButtons: document.querySelectorAll('#activitySelector button'),
+  caFieldLabel: document.getElementById('caFieldLabel'),
+  ca: document.getElementById('caInput'),
+  prorataToggle: document.getElementById('prorataToggle'),
+  prorataLabel: document.getElementById('prorataLabel'),
+  dateWrap: document.getElementById('dateWrap'),
+  dateFieldLabel: document.getElementById('dateFieldLabel'),
+  creationDate: document.getElementById('creationDate'),
+  helperText: document.getElementById('helperText'),
+
+  railMicroTitleText: document.getElementById('railMicroTitleText'),
+  railTvaTitleText: document.getElementById('railTvaTitleText'),
+
+  microValue: document.getElementById('microValue'),
+  microMax: document.getElementById('microMax'),
+  microZoneSafe: document.getElementById('microZoneSafe'),
+  microZoneWatch: document.getElementById('microZoneWatch'),
+  microZoneDanger: document.getElementById('microZoneDanger'),
+  microMarker: document.getElementById('microMarker'),
+  microPin: document.getElementById('microPin'),
+  microPinText: document.getElementById('microPinText'),
+  microBadge: document.getElementById('microBadge'),
+  microCaption: document.getElementById('microCaption'),
+
+  tvaValue: document.getElementById('tvaValue'),
+  tvaMax: document.getElementById('tvaMax'),
+  tvaZoneSafe: document.getElementById('tvaZoneSafe'),
+  tvaZoneWatch: document.getElementById('tvaZoneWatch'),
+  tvaZoneDanger: document.getElementById('tvaZoneDanger'),
+  tvaMarker: document.getElementById('tvaMarker'),
+  tvaPin: document.getElementById('tvaPin'),
+  tvaPinText: document.getElementById('tvaPinText'),
+  tvaBadge: document.getElementById('tvaBadge'),
+  tvaCaption: document.getElementById('tvaCaption'),
+
+  verdict: document.getElementById('verdict'),
+  verdictIcon: document.getElementById('verdictIcon'),
+  verdictTitle: document.getElementById('verdictTitle'),
+  verdictBody: document.getElementById('verdictBody'),
+
+  foot1: document.getElementById('foot1Text'),
+  foot2: document.getElementById('foot2Text'),
+  foot3: document.getElementById('foot3Text'),
+  faqHeading: document.getElementById('faqHeading'),
+  faqList: document.getElementById('faqList'),
+  aboutHeading: document.getElementById('aboutHeading'),
+  aboutText: document.getElementById('aboutText')
+};
+
+function fmt(n){
+  var locale = lang==='en' ? 'en-GB' : 'fr-FR';
+  return Math.round(n).toLocaleString(locale) + ' \u20ac';
+}
+
+function setPinPosition(pinEl, pct){
+  var clamped = Math.max(Math.min(pct, 96), 4);
+  pinEl.style.left = clamped + '%';
+}
+
+function daysRemainingInYear(dateStr){
+  var d = new Date(dateStr + 'T00:00:00');
+  if(isNaN(d)) return 365;
+  var year = d.getFullYear();
+  var endOfYear = new Date(year, 11, 31);
+  var diff = Math.round((endOfYear - d) / 86400000) + 1;
+  return Math.max(Math.min(diff, 365), 1);
+}
+
+function setBadge(el, state, text){
+  el.classList.remove('safe','watch','danger');
+  el.classList.add(state);
+  el.textContent = text;
+}
+
+function setPin(pinEl, textEl, state, pct, value){
+  pinEl.classList.remove('safe','watch','danger');
+  pinEl.classList.add(state);
+  setPinPosition(pinEl, pct);
+  textEl.textContent = fmt(value);
+}
+
+function applyStaticText(){
+  var t = D[lang];
+  document.title = t.title;
+  var md=document.querySelector('meta[name=description]'); if(md) md.setAttribute('content',t.metaDesc);
+  document.getElementById('btnFr').setAttribute('aria-pressed', lang==='fr');
+  document.getElementById('btnEn').setAttribute('aria-pressed', lang==='en');
+
+  els.localeTagText.textContent = t.eyebrow;
+  els.mainTitle.textContent = t.h1;
+  els.ledeText.innerHTML = t.lede;
+  els.activityFieldLabel.textContent = t.activityFieldLabel;
+  els.activityButtons.forEach(function(btn){ btn.innerHTML = t.activities[btn.dataset.key]; });
+  els.caFieldLabel.textContent = t.caFieldLabel;
+  els.prorataLabel.textContent = t.prorataLabel;
+  els.dateFieldLabel.textContent = t.dateFieldLabel;
+  els.helperText.innerHTML = t.helperText;
+  els.railMicroTitleText.textContent = t.railMicroTitle;
+  els.railTvaTitleText.textContent = t.railTvaTitle;
+  els.foot1.textContent = t.footnotes[0];
+  els.foot2.textContent = t.footnotes[1];
+  els.foot3.textContent = t.footnotes[2];
+  els.faqHeading.textContent = t.faqHeading;
+  els.faqList.innerHTML = t.faq.map(function(item){
+    return '<div class="faq-item"><h3 class="faq-q">'+item.q+'</h3><p class="faq-a">'+item.a+'</p></div>';
+  }).join('');
+  els.aboutHeading.textContent = t.aboutHeading;
+  els.aboutText.innerHTML = t.aboutText;
+  document.documentElement.lang = lang;
+
+  var navMicro=document.querySelector('a[href="/simulateur-seuils-micro-entreprise"]');
+  var navSalaire=document.querySelector('a[href="/calculateur-salaire-brut-net"]');
+  if(navMicro) navMicro.textContent=t.navMicro;
+  if(navSalaire) navSalaire.textContent=t.navSalaire;
+}
+
+/* ================= Navigation entre langues ================= */
+function versLangue(l){
+  var alt=window.__ALT__;
+  if(alt && alt[l] && l!==lang){ location.href=alt[l]; return; }
+  lang=l; applyStaticText(); render();
+}
+document.getElementById('btnFr').addEventListener('click',function(){versLangue('fr');});
+document.getElementById('btnEn').addEventListener('click',function(){versLangue('en');});
+
+els.activityButtons.forEach(function(btn){
+  btn.addEventListener('click',function(){
+    els.activityButtons.forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    currentActivity = btn.dataset.key;
+    render();
+  });
+});
+
+els.prorataToggle.addEventListener('change',function(){
+  els.dateWrap.classList.toggle('open', els.prorataToggle.checked);
+  render();
+});
+els.creationDate.addEventListener('change', render);
+els.ca.addEventListener('input', render);
+
+function render(){
+  var t = D[lang];
+  var act = ACTIVITIES[currentActivity];
+  var actName = t.activityNames[currentActivity];
+  var ca = Math.max(parseFloat(els.ca.value) || 0, 0);
+
+  var ratio = 1;
+  if(els.prorataToggle.checked){
+    var jours = daysRemainingInYear(els.creationDate.value);
+    ratio = jours / 365;
+  }
+
+  var plafondMicro = act.plafondMicro * ratio;
+  var tvaBase = act.tvaBase * ratio;
+  var tvaMajore = act.tvaMajore * ratio;
+
+  var microWatchStart = plafondMicro * 0.9;
+  var microMaxScale = plafondMicro * 1.15;
+  var microSafePct = Math.min((microWatchStart / microMaxScale) * 100, 100);
+  var microWatchPct = Math.min((plafondMicro / microMaxScale) * 100, 100) - microSafePct;
+  var microDangerPct = 100 - microSafePct - microWatchPct;
+
+  els.microZoneSafe.style.left = '0%';
+  els.microZoneSafe.style.width = microSafePct + '%';
+  els.microZoneWatch.style.left = microSafePct + '%';
+  els.microZoneWatch.style.width = microWatchPct + '%';
+  els.microZoneDanger.style.left = (microSafePct + microWatchPct) + '%';
+  els.microZoneDanger.style.width = microDangerPct + '%';
+
+  var microMarkerPct = Math.min((ca / microMaxScale) * 100, 100);
+  els.microMarker.style.left = microMarkerPct + '%';
+  els.microValue.innerHTML = t.plafondWord+'\u00a0: <strong>'+fmt(plafondMicro)+'</strong>';
+  els.microMax.textContent = fmt(microMaxScale);
+
+  var microState;
+  if(ca >= plafondMicro){ microState = 'danger'; }
+  else if(ca >= microWatchStart){ microState = 'watch'; }
+  else { microState = 'safe'; }
+  els.microMarker.style.background = microState === 'safe' ? 'var(--ink)' : 'var(--'+microState+')';
+  setPin(els.microPin, els.microPinText, microState, microMarkerPct, ca);
+
+  var microOver = ca > plafondMicro;
+  if(microOver){
+    setBadge(els.microBadge, 'danger', t.badges.over);
+    els.microCaption.innerHTML = t.microCaptionOver(fmt(ca - plafondMicro));
+  } else if(microState === 'watch'){
+    setBadge(els.microBadge, 'watch', t.badges.watch);
+    els.microCaption.innerHTML = t.microCaptionWatch(fmt(plafondMicro - ca));
+  } else {
+    setBadge(els.microBadge, 'safe', t.badges.ok);
+    els.microCaption.innerHTML = t.microCaptionSafe(fmt(plafondMicro - ca));
+  }
+
+  var tvaMaxScale = tvaMajore * 1.15;
+  var tvaSafePct = Math.min((tvaBase / tvaMaxScale) * 100, 100);
+  var tvaWatchPct = Math.min((tvaMajore / tvaMaxScale) * 100, 100) - tvaSafePct;
+  var tvaDangerPct = 100 - tvaSafePct - tvaWatchPct;
+
+  els.tvaZoneSafe.style.left = '0%';
+  els.tvaZoneSafe.style.width = tvaSafePct + '%';
+  els.tvaZoneWatch.style.left = tvaSafePct + '%';
+  els.tvaZoneWatch.style.width = Math.max(tvaWatchPct,0) + '%';
+  els.tvaZoneDanger.style.left = (tvaSafePct + Math.max(tvaWatchPct,0)) + '%';
+  els.tvaZoneDanger.style.width = Math.max(tvaDangerPct,0) + '%';
+
+  var tvaMarkerPct = Math.min((ca / tvaMaxScale) * 100, 100);
+  els.tvaMarker.style.left = tvaMarkerPct + '%';
+  els.tvaValue.innerHTML = t.baseWord+'\u00a0: <strong>'+fmt(tvaBase)+'</strong><span class="sep">\u00b7</span>'+t.majoreWord+'\u00a0: <strong>'+fmt(tvaMajore)+'</strong>';
+  els.tvaMax.textContent = fmt(tvaMaxScale);
+
+  var tvaState;
+  if(ca <= tvaBase){ tvaState = 'safe'; }
+  else if(ca <= tvaMajore){ tvaState = 'watch'; }
+  else { tvaState = 'danger'; }
+  els.tvaMarker.style.background = tvaState === 'safe' ? 'var(--ink)' : 'var(--'+tvaState+')';
+  setPin(els.tvaPin, els.tvaPinText, tvaState, tvaMarkerPct, ca);
+
+  if(tvaState === 'safe'){
+    setBadge(els.tvaBadge, 'safe', t.badges.franchise);
+    els.tvaCaption.innerHTML = t.tvaCaptionSafe(fmt(tvaBase));
+  } else if(tvaState === 'watch'){
+    setBadge(els.tvaBadge, 'watch', t.badges.tolerance);
+    els.tvaCaption.innerHTML = t.tvaCaptionWatch(fmt(tvaBase), fmt(tvaMajore));
+  } else {
+    setBadge(els.tvaBadge, 'danger', t.badges.tvaDue);
+    els.tvaCaption.innerHTML = t.tvaCaptionOver(fmt(tvaMajore));
+  }
+
+  els.verdict.classList.remove('safe','watch','danger');
+  var verdictClass, icon, title, body;
+  if(microOver || tvaState === 'danger'){
+    verdictClass = 'danger'; icon = '!';
+    title = t.verdict.dangerTitle;
+    body = microOver ? t.verdict.dangerBodyMicro(actName) : t.verdict.dangerBodyTva;
+  } else if(microState === 'watch' || tvaState === 'watch'){
+    verdictClass = 'watch'; icon = '~';
+    title = t.verdict.watchTitle;
+    body = t.verdict.watchBody;
+  } else {
+    verdictClass = 'safe'; icon = '\u2713';
+    title = t.verdict.safeTitle;
+    body = t.verdict.safeBody(actName);
+  }
+  els.verdict.classList.add(verdictClass);
+  els.verdictIcon.textContent = icon;
+  els.verdictTitle.textContent = title;
+  els.verdictBody.textContent = body;
+}
+
+var p=new URLSearchParams(location.search).get('lang')
+      || window.__LANG__ || document.documentElement.lang;
+lang = (p==='en') ? 'en' : 'fr';
+applyStaticText();
+render();
+})();
+</script>
+
+</body></html>
