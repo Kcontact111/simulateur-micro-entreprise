@@ -7,7 +7,6 @@
 
   "redirects": [
     {
-      "comment": "L'outil micro-entreprise occupait la racine : on redirige vers sa nouvelle adresse pour ne perdre ni les visiteurs ni le referencement acquis.",
       "source": "/index.html",
       "destination": "/simulateur-seuils-micro-entreprise",
       "permanent": true
@@ -16,21 +15,18 @@
 
   "headers": [
     {
-      "comment": "baremes.js ne doit jamais rester en cache : sinon une mise a jour de bareme mettrait des jours a se propager chez les visiteurs.",
       "source": "/baremes.js",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
-      "comment": "Les pages HTML : revalidation systematique, contenu servi depuis le cache en attendant.",
       "source": "/(.*).html",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
-      "comment": "En-tetes de securite appliques a tout le site.",
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
