@@ -469,7 +469,7 @@
   <footer>
     <div class="foot-item"><sup>1</sup> <span id="foot1Text" data-ihtml="foot1">Plafonds 2026–2028 : 203 100 € (vente / hébergement), 83 600 € (services BIC/BNC), 15 000 € (meublés non classés). Dépassement deux années consécutives → sortie du régime micro l'année suivante.</span></div>
     <div class="foot-item"><sup>2</sup> <span id="foot2Text" data-ihtml="foot2">Franchise TVA 2026 : seuil de base 85 000 € / seuil majoré 93 500 € (vente, hébergement) ; seuil de base 37 500 € / seuil majoré 41 250 € (services). Entre les deux seuils, la franchise est maintenue jusqu'à la fin de l'année en cours ; au-delà du seuil majoré, la TVA s'applique dès le jour du dépassement. Les meublés non classés sont approchés ici avec le seuil des services — vérifiez ce point si vous cumulez plusieurs activités.</span></div>
-    <div class="foot-item"><span id="foot3Text" data-i="foot3">Simulateur informatif, à jour au 27 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité.</span></div>
+    <div class="foot-item"><span id="foot3Text" data-i="foot3">Simulateur informatif, à jour au 2 août 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité.</span></div>
   </footer>
 
 </div>
@@ -483,6 +483,25 @@
    (ouverture locale du HTML sans serveur), on retombe sur ces valeurs de
    secours, qui doivent rester identiques à celles de baremes.js. */
 var BX = window.BAREMES;
+
+/* Résout les jetons {xxx} de baremes.js dans une valeur du dictionnaire, y
+   compris à l'intérieur des tableaux et objets imbriqués (footnotes, faq).
+   INDISPENSABLE : build.js pré-rend correctement les jetons dans le HTML, mais
+   applyStaticText() réécrit ces mêmes textes au chargement à partir du
+   dictionnaire brut. Sans cette résolution, le visiteur verrait s'afficher
+   « {dateMicro} » en toutes lettres à la place de la date.
+   Toute lecture du dictionnaire destinée à l'affichage doit passer par tr(). */
+function tr(v){
+  if(typeof v === 'string') return BX ? BX.remplace(v, lang) : v;
+  if(Object.prototype.toString.call(v) === '[object Array]') return v.map(tr);
+  if(v && typeof v === 'object'){
+    var o={};
+    for(var k in v){ if(Object.prototype.hasOwnProperty.call(v,k)) o[k]=tr(v[k]); }
+    return o;
+  }
+  return v;
+}
+
 var ACTIVITIES = BX ? {
   vente:    { plafondMicro: BX.MICRO.plafondVente,   tvaBase: BX.MICRO.tvaBaseVente,   tvaMajore: BX.MICRO.tvaMajoreVente },
   services: { plafondMicro: BX.MICRO.plafondService, tvaBase: BX.MICRO.tvaBaseService, tvaMajore: BX.MICRO.tvaMajoreService },
@@ -530,7 +549,7 @@ F.verdict={
 };
 F.footnotes=["Plafonds 2026–2028 : 203 100 € (vente / hébergement), 83 600 € (services BIC/BNC), 15 000 € (meublés non classés). Dépassement deux années consécutives → sortie du régime micro l'année suivante.",
 "Franchise TVA 2026 : seuil de base 85 000 € / seuil majoré 93 500 € (vente, hébergement) ; seuil de base 37 500 € / seuil majoré 41 250 € (services). Entre les deux seuils, la franchise est maintenue jusqu'à la fin de l'année en cours ; au-delà du seuil majoré, la TVA s'applique dès le jour du dépassement. Les meublés non classés sont approchés ici avec le seuil des services — vérifiez ce point si vous cumulez plusieurs activités.",
-"Simulateur informatif, à jour au 27 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité."];
+"Simulateur informatif, à jour au {dateMicro}. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité."];
 F.foot1=F.footnotes[0];F.foot2=F.footnotes[1];
 F.faqHeading="Questions fréquentes";
 F.aboutHeading="À propos de cet outil";
@@ -544,7 +563,7 @@ F.faq=[
 ];
 F.toolsTitle="Les autres outils";
 F.t2k="Salariés";F.t2t="Salaire brut en net";F.t2d="Convertissez brut en net et net en brut, avec le détail de chaque cotisation.";
-F.foot3="Simulateur informatif, à jour au 27 juillet 2026. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité.";
+F.foot3="Simulateur informatif, à jour au {dateMicro}. Il ne remplace pas l'avis d'un expert-comptable, notamment pour les activités mixtes, les professions réglementées (avocats, auteurs, artistes-interprètes) qui ont des seuils spécifiques, ou une première année d'activité.";
 
 N.title="France Micro-Entrepreneur: Turnover Cap & VAT Threshold Calculator 2026";
 N.metaDesc="Check instantly whether you exceed the micro-entreprise cap (EUR 203,100 / EUR 83,600) or the VAT exemption threshold (EUR 85,000 / EUR 37,500). Auto-entrepreneur simulator, current for 2026, in French and English.";
@@ -580,7 +599,7 @@ N.verdict={
 };
 N.footnotes=["2026–2028 caps: €203,100 (goods / accommodation), €83,600 (services, BIC/BNC), €15,000 (unclassified furnished rentals). Exceeding the cap two years in a row moves you to the standard tax regime the following year.",
 "2026 VAT exemption (franchise en base de TVA): base threshold €85,000 / upper threshold €93,500 (goods, accommodation); base threshold €37,500 / upper threshold €41,250 (services). Between the two thresholds, the exemption still applies until year-end; above the upper threshold, VAT applies from the day it's crossed. Unclassified furnished rentals are approximated here with the services threshold — check this if you combine several activities.",
-"Informational simulator, up to date as of 27 July 2026. It does not replace advice from a French chartered accountant (expert-comptable), particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity. This is a French-specific regime: it is not equivalent to the UK's VAT registration threshold, US self-employment rules, or any other country's small-business scheme — the thresholds are not interchangeable."];
+"Informational simulator, up to date as of {dateMicro}. It does not replace advice from a French chartered accountant (expert-comptable), particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity. This is a French-specific regime: it is not equivalent to the UK's VAT registration threshold, US self-employment rules, or any other country's small-business scheme — the thresholds are not interchangeable."];
 N.foot1=N.footnotes[0];N.foot2=N.footnotes[1];
 N.faqHeading="Frequently asked questions";
 N.aboutHeading="About this tool";
@@ -594,7 +613,7 @@ N.faq=[
 ];
 N.toolsTitle="Other tools";
 N.t2k="Employees";N.t2t="Gross to net salary";N.t2d="Convert gross to net and back, with every contribution itemised.";
-N.foot3="Informational simulator, up to date as of 27 July 2026. It does not replace advice from a French chartered accountant, particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity.";
+N.foot3="Informational simulator, up to date as of {dateMicro}. It does not replace advice from a French chartered accountant, particularly for mixed activities, regulated professions (lawyers, authors, performing artists) with specific thresholds, or a first year of activity.";
 
 var lang='fr';
 
@@ -688,7 +707,7 @@ function setPin(pinEl, textEl, state, pct, value){
 }
 
 function applyStaticText(){
-  var t = D[lang];
+  var t = tr(D[lang]);
   document.title = t.title;
   var md=document.querySelector('meta[name=description]'); if(md) md.setAttribute('content',t.metaDesc);
   document.getElementById('btnFr').setAttribute('aria-pressed', lang==='fr');
