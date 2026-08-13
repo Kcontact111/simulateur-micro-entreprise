@@ -44,7 +44,7 @@
   /* ---------------------------------------------------------------------- */
   B.SITE = {
     nom: "Les Bons Chiffres",
-    domaine: "https://lesbonschiffres.com",
+    domaine: "https://www.lesbonschiffres.com",
     baseline: {
       fr: "Des calculateurs administratifs et fiscaux tenus à jour, sans compte à créer.",
       en: "Administrative and tax calculators kept up to date, with no account to create."
