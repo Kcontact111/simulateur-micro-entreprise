@@ -258,6 +258,34 @@ for (const o of B.OUTILS.filter(x => x.etat === 'live')) {
   }
 }
 
+/* Liens vers les outils écrits en dur dans la page d'accueil.
+   Sans eux, la grille des outils et le pied de page n'existent qu'après
+   exécution du JavaScript : Google ne voit alors aucun lien de l'accueil
+   vers les outils, les juge orphelins et finit par les retirer de l'index. */
+function liensOutils(html, L, lang) {
+  const cible = (o) => (lang === 'en' && o.urlEn) ? o.urlEn : o.url;
+  const grille = B.OUTILS.map((o) => {
+    const live = o.etat === 'live', bal = live ? 'a' : 'span';
+    const href = live ? ' href="' + cible(o) + '"' : '';
+    return '<' + bal + href + ' class="tool' + (live ? '' : ' soon') + '">'
+      + '<div class="tk"><span class="dot"></span>' + o.cat[lang] + (live ? '' : ' · ' + L.soon) + '</div>'
+      + '<div class="tt">' + o.titre[lang] + '</div>'
+      + '<div class="td">' + o.desc[lang] + '</div>'
+      + (live ? '<div class="go">' + L.go + ' \u2192</div>' : '')
+      + '</' + bal + '>';
+  }).join('');
+  const pied = B.OUTILS.filter((o) => o.etat === 'live')
+    .map((o) => '<a href="' + cible(o) + '">' + o.titre[lang] + '</a>').join('');
+
+  const avant = html;
+  html = html.replace(/(<div class="tools" id="toolsGrid">)[\s\S]*?(<\/div>)/, '$1' + grille + '$2');
+  if (html === avant) echec('accueil (' + lang + ') : grille des outils introuvable, liens non écrits');
+  const avant2 = html;
+  html = html.replace(/(<div class="fl" id="footLinks">)[\s\S]*?(<\/div>)/, '$1' + pied + '$2');
+  if (html === avant2) echec('accueil (' + lang + ') : pied de page introuvable, liens non écrits');
+  return html;
+}
+
 /* Page d'accueil, même traitement */
 {
   const src = fs.readFileSync(path.join(SORTIE, 'index.html'), 'utf8');
@@ -265,6 +293,7 @@ for (const o of B.OUTILS.filter(x => x.etat === 'live')) {
   if (dico) {
     for (const lang of B.LANGUES) {
       const r = versionLangue(src, dico, lang, '/', '/en/');
+      r.html = liensOutils(r.html, dico[lang], lang);
       const dest = lang === 'en' ? path.join(SORTIE, 'en', 'index.html') : path.join(SORTIE, 'index.html');
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       fs.writeFileSync(dest, r.html);
